@@ -89,62 +89,44 @@ function debounce (func, wait, immediate) {
 	};
 }
 
-function paintSettings () {
-	document.getElementById('text-input-id-0').value = mapsKey;
-	document.getElementById('text-input-id-1').value = address;
-	document.getElementById('slider-id-01').value = width;
-	document.getElementById('slider-id-02').value = height;
-	document.getElementById('slider-id-03').value = zoom;
-}
-
-function paintSliderValues () {
-	document.getElementById('slider-id-01-val').innerHTML = document.getElementById('slider-id-01').value;
-	document.getElementById('slider-id-02-val').innerHTML = document.getElementById('slider-id-02').value;
-	document.getElementById('slider-id-03-val').innerHTML = document.getElementById('slider-id-03').value;
-}
-
 function paintMap() {
+
+	console.log('2');
 	mapsKey = document.getElementById('text-input-id-0').value;
-	address = document.getElementById('text-input-id-1').value;
-	width = document.getElementById('slider-id-01').value;
-	height = document.getElementById('slider-id-02').value;
-	zoom = document.getElementById('slider-id-03').value;
-	link = document.getElementById('text-input-id-2').value;
-	if (!address) {
+	console.log('mapsKey'+mapsKey);
+	//address = document.getElementById('text-input-id-1').value;
+	//width = document.getElementById('slider-id-01').value;
+	//height = document.getElementById('slider-id-02').value;
+	//zoom = document.getElementById('slider-id-03').value;
+	link = '<table width=100% border=0 cellspacing=0 cellpadding=0><tr><td align=center><table border=0 cellspacing=0 cellpadding=0><tr><td id=abc class=innertd buttonblock bgcolor=#009DDC style= border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; background-color: #009DDC;><a target=_blank class=buttonstyles style= font-size: 16px; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; text-align: center; text-decoration: none; display: block; background-color: #009DDC; border: 1px solid #009DDC; padding: 10px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; id=abc var= set= href=https://techkasetti.com/index.html?Channel='+mapsKey+' title= alias= conversion=false data-linkto=other>Button Text</a></td></tr></table></td></tr></table>';
+	if (!mapsKey) {
 		return;
 	}
-	var url = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
+	/*var url = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
 		address.split(' ').join('+') + '&size=' + width + 'x' + height + '&zoom=' + zoom +
-		'&markers=' + address.split(' ').join('+') + '&key=' + mapsKey;
-	sdk.setContent('<a href="' + link + '"><img src="' + url + '" /></a>');
+		'&markers=' + address.split(' ').join('+') + '&key=' + mapsKey;*/
+	sdk.setContent(link);
 	sdk.setData({
-		address: address,
-		width: width,
-		height: height,
-		zoom: zoom,
-		link: link,
 		mapsKey: mapsKey
 	});
-	localStorage.setItem('googlemapsapikeyforblock', mapsKey);
+	//localStorage.setItem('googlemapsapikeyforblock', mapsKey);
+
 }
 
 sdk.getData(function (data) {
-	address = data.address || '';
-	width = data.width || 400;
-	height = data.height || 300;
-	zoom = data.zoom || 15;
-	link = data.link || '';
-	mapsKey = data.mapsKey || localStorage.getItem('googlemapsapikeyforblock');
-	paintSettings();
-	paintSliderValues();
+	
+	mapsKey = data.mapsKey;
+	console.log('mapsKey'+mapsKey);
+	//paintSettings();
+	//paintSliderValues();
 	paintMap();
 });
 
 document.getElementById('workspace').addEventListener("input", function () {
+	console.log('3');
 	debounce(paintMap, 500)();
-	paintSliderValues();
+	//paintSliderValues();
 });
-
 
 /***/ }),
 /* 1 */
