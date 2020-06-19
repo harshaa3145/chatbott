@@ -69,7 +69,7 @@
 
 __webpack_require__(1);
 
-var SDK = require('blocksdk');
+var SDK = __webpack_require__(19);
 var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy
 
 var address, width, height, zoom, link, mapsKey;
