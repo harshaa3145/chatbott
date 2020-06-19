@@ -971,7 +971,7 @@ if (typeof(window) === 'object') {
 	window.sfdc.BlockSDK = SDK;
 }
 if (true) {
-	module.exports = SDK;
+	module.exports = SDK
 }
 
 
